@@ -1,3 +1,5 @@
+
+
 //CLOSE POPUP
 
 function closemainPopup(event) {
@@ -26,7 +28,7 @@ function addProject() {
                                 </div>
                                 <div class="field add-field-btn">
                                     <p class="opacity-0">0</p>
-                                    <button class="btn-primary j-center" type="button" onclick="addNewClient(this)">
+                                    <button class="btn-primary j-center" type="button">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle"
                                             class="">
                                             <path fill=""
@@ -41,13 +43,13 @@ function addProject() {
                                 <div class="accordion-heading flex align-center j-between">
                                     <h3>Profile details</h3>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="angle-down"
-                                        class="icon">
+                                        class="svg-18 arrow">
                                         <path
                                             d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z">
                                         </path>
                                     </svg>
                                 </div>
-                                <div class="accordion-data">
+                                <div class="accordion-data profile-accordion hide">
                                     <div class="grid gtc-2 gap-10">
                                         <div class="field">
                                             <p class="title">Name</p>
@@ -82,13 +84,13 @@ function addProject() {
                                 <div class="accordion-heading flex align-center j-between">
                                     <h3>Project details</h3>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="angle-down"
-                                        class="icon">
+                                        class="svg-18 arrow">
                                         <path
                                             d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z">
                                         </path>
                                     </svg>
                                 </div>
-                                <div class="accordion-data">
+                                <div class="accordion-data hide">
                                     <div class="grid gtc-2 gap-10">
                                         <div class="field">
                                             <p class="title">Project Name</p>
@@ -133,13 +135,13 @@ function addProject() {
                                 <div class="accordion-heading flex align-center j-between">
                                     <h3>Attached files</h3>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="angle-down"
-                                        class="icon">
+                                        class="svg-18 arrow">
                                         <path
                                             d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z">
                                         </path>
                                     </svg>
                                 </div>
-                                <div class="accordion-data">
+                                <div class="accordion-data hide">
                                     <div class="field">
                                         <button class="btn-secondary" type="button" onclick="">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="image-plus">
@@ -151,9 +153,10 @@ function addProject() {
                                         </button>
                                     </div>
                                     <div class="uploaded-files flex align-center gap-10 f-wrap">
-                                        <figure>
+                                        <figure class="hide">
                                             <img src="/img/admin.jpg" alt="file">
                                             <figcaption>Admin.jpg</figcaption>
+                                            <span>&times</span>
                                         </figure>
                                     </div>
                                 </div>
@@ -167,11 +170,26 @@ function addProject() {
                         </div>
                     </div>`
     mainPopup.innerHTML = childPopup;
-}
+    
+    document.querySelectorAll('.accordion').forEach((element)=> {
+        element.querySelector('.accordion-heading').addEventListener('click',(event)=>{
+            event.stopPropagation()
+            element.querySelector('.accordion-data').classList.toggle('hide');
+            element.querySelector('.accordion-heading .arrow').classList.toggle('active');
+        })
+    });
+    
+    
+    document.querySelector('.add-field-btn').addEventListener('click', ()=>{
+        document.querySelector('.accordion-heading .arrow').classList.add('active');
+        document.querySelector('.profile-accordion').classList.remove('hide');
+    })
 
-//ADD A NEW CLIENT INSIDE A PROJECT
-function addNewClient() {
-    document.querySelector(`.newField`).classList.remove(`hide`);
+    document.querySelector('.accordion-data button').addEventListener("click", ()=>{
+        document.querySelectorAll('figure').forEach(image=>{
+            image.classList.remove('hide')
+        })
+    })
 }
 
 
@@ -270,7 +288,7 @@ function addEmployee() {
                             </div>
                             <hr>
                             <div class="field">
-                                <button class="btn-primary" type="button">
+                                <button class="btn-secondary" type="button" onclick="addNewEmployee">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="plus-circle"
                                         class="">
                                         <path fill=""
@@ -281,7 +299,7 @@ function addEmployee() {
                                 </button>
                             </div>
 
-                            <div class="grid gtc-2 gap-10 hide">
+                            <div class="grid gtc-2 gap-10 employeeField hide">
                                 <div class="field">
                                     <p class="title">Name</p>
                                     <input type="text" name="" id="" placeholder="Add Employee">
@@ -362,7 +380,10 @@ function removeEmployee() {
     mainPopup.innerHTML = childPopup;
 }
 
-
+//ADD A NEW CLIENT INSIDE A PROJECT
+function addNewEmployee() {
+    document.querySelector(`.employeeField`).classList.remove(`hide`);
+}
 //ADD SUB-TASK
 function addSubTask() {
     const mainPopup = document.querySelector(`.main-popup`);
@@ -433,22 +454,22 @@ function removeSubTask() {
 
 
 
-function validateInput() {
-    const field = document.querySelectorAll(`.field`);
+// function validateInput() {
+//     const field = document.querySelectorAll(`.field`);
 
-    field.forEach(val => {
-        const input = val.querySelector(`input`);
-        const errMsg = val.querySelector(`span.err`);
+//     field.forEach(val => {
+//         const input = val.querySelector(`input`);
+//         const errMsg = val.querySelector(`span.err`);
 
-        if (input.hasAttribute(`required`) && input.value.trim() === '') {
-            errMsg.classList.remove(`hide`);
-            field.classList.add(`error`);
-        } else {
-            errMsg.classList.add(`hide`);
-            field.classList.remove(`error`);
-        }
-    })
-}
+//         if (input.hasAttribute(`required`) && input.value.trim() === '') {
+//             errMsg.classList.remove(`hide`);
+//             field.classList.add(`error`);
+//         } else {
+//             errMsg.classList.add(`hide`);
+//             field.classList.remove(`error`);
+//         }
+//     })
+// }
 
 
-validateInput();
+// validateInput();

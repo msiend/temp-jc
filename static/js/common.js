@@ -1,3 +1,57 @@
+// OPEN ASIDE
+document.querySelectorAll('nav > ul > li').forEach((item)=>{
+    item.addEventListener("click", (e)=>{
+        item.querySelector('.arrow').classList.toggle('active')
+        item.classList.toggle('active');
+        const subMenu= item.querySelector('.sub-menu');
+        if(subMenu){
+            subMenu.classList.toggle('active')
+            const listItem = item.querySelectorAll('.sub-menu p');
+            listItem.forEach((link)=>{
+                if(listItem.isClicked){
+                    listItem.classList.add('active')
+                }
+            })
+        }
+        else{
+            subMenu.classList.remove('active');
+        }
+        
+    })
+})
+
+document.querySelectorAll('.sub-menu p').forEach((listItem)=>{
+    listItem.addEventListener("click", ()=>{
+        console.log("hi")
+    })
+})
+
+
+document.querySelector('.sideArrow').addEventListener('click', ()=>{
+    document.querySelector('.sideArrow').classList.toggle('active')
+})
+
+// const navItems = document.querySelectorAll('nav > ul > li');
+// navItems.forEach((item) => {
+//     // item.classList.remove("active")
+//     const subMenu = item.querySelector('.sub-menu');
+//     const p = item.querySelectorAll('.sub-menu p');
+//     const arrow = item.querySelector(`.arrow`);
+
+//     item.addEventListener("click", (event) => {
+//         event.preventDefault();
+//         item.classList.add("active");
+//         if (subMenu) {
+//             arrow.classList.add("active");
+//             subMenu.classList.add("active");
+//             p[0].classList.add("active");
+//         } else {
+//             // arrow.classList.remove("active");
+//             // subMenu.classList.remove("active");
+//         }
+//     })
+// })
+
 // Highlight Checkbox 
 function toggleHighlight(checkbox) {
     const row = checkbox.closest('tr');
@@ -36,36 +90,7 @@ document.querySelectorAll('.select-all').forEach(div => {
     });
 })
 
-// Open SUb Menu
-const navItems = document.querySelectorAll('nav > ul > li');
-navItems.forEach((item) => {
-    // item.classList.remove("active")
-    const subMenu = item.querySelector('.sub-menu');
-    const p = item.querySelectorAll('.sub-menu p');
-    const arrow = item.querySelector(`.arrow`);
 
-    item.addEventListener("click", (event) => {
-        event.preventDefault();
-        item.classList.add("active");
-        if (subMenu) {
-            arrow.classList.add("active");
-            subMenu.classList.add("active");
-            p[0].classList.add("active");
-        } else {
-            // arrow.classList.remove("active");
-            // subMenu.classList.remove("active");
-        }
-    })
-})
-
-const p = document.querySelectorAll(`.sub-menu p`);
-function parag(){p.forEach((para)=>{
-    para.classList.remove("active");
-    para.addEventListener("click", ()=>{
-        para.classList.add("active")    
-    })
-})};
-parag();
 // OPEN PROJECT DETAILS
 function openProjectDetails(pageId) {
     const page = document.querySelectorAll(`.right > div`);
@@ -137,6 +162,13 @@ function seeEmployee() {
 function hideNotificationPopup(event) {
     document.querySelector(`.section-popup`).classList.add('hide');
 }
+
+// OPEN VIEW MORE
+document.querySelectorAll('.dropdown-icon').forEach(element => {
+    element.addEventListener('click', ()=>{
+        document.querySelector('.menu-dropdown-list').classList.toggle('hide'); 
+    })
+});
 
 //ALERTS
 function successAlert() {

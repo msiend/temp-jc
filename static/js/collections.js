@@ -15,7 +15,7 @@ function addCollection(){
                         <button type="button" class="btn-warning close" onclick="closemainPopup()">Close</button>
                         <hr>
 
-                        <div class="addGrid">
+                        <div class="grid gtc-2 gap-10">
                             <div class="field">
                                 <p class="title">Date</p>
                                 <input type="date" name="" id="" required>
